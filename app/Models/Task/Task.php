@@ -12,9 +12,22 @@ class Task extends Model
     use HasFactory;
 
     /**
-     * Available task statuses.
+     * The attributes that should be cast.
+     *
+     * @var array
      */
-    public const STATUSES = ['pending', 'completed'];
+    protected $casts = [
+        'status' => 'boolean',
+        'user_id' => 'integer',
+        'title' => 'string'
+    ];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['user_id', 'title', 'description'];
 
     /**
      * Define the user that owns the model.

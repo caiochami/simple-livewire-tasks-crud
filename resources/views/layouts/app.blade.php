@@ -17,8 +17,12 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     </head>
     <body class="font-sans antialiased">
+
+        @livewire('livewire-ui-spotlight')
+        
         <x-jet-banner />
 
         <div class="min-h-screen bg-gray-100">

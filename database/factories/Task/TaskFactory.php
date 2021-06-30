@@ -24,8 +24,8 @@ class TaskFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'name' => $this->faker->text(255),
-            'status' => $this->faker->randomElement(Task::STATUSES)
+            'title' => $this->faker->text(255),
+            'status' => $this->faker->boolean
         ];
     }
 }
