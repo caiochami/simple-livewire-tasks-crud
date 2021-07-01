@@ -19,7 +19,7 @@ class Task extends Model
     protected $casts = [
         'status' => 'boolean',
         'user_id' => 'integer',
-        'title' => 'string'
+        'title' => 'string',
     ];
 
     /**
@@ -37,5 +37,17 @@ class Task extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Model validation rules.
+     *
+     * @return array
+     */
+    public static function rules(): array
+    {
+        return [
+            'title' => ['required', 'max:255', 'string']
+        ];
     }
 }

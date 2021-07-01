@@ -2,19 +2,34 @@
 
 namespace App\Http\Livewire\Task;
 
+use App\Models\Task\Task;
 use Livewire\Component;
 
 class Create extends Component
 {
-    protected $rules = ['title' => 'required'];
+    protected function rules()
+    {
+        return Task::rules();
+    }
 
+    /**
+     * Title property
+     *
+     * @var string
+     */
+    public $title;
+
+    /**
+     * Create Task resource.
+     *
+     * @return void
+     */
     public function create()
     {
-        auth()->user()->tasks()->create(
-            $this->validate()
+        $validated = collect($this->validate());
+        Task::create(
+            $validated->merge(['user_id' => \auth()->id()])->all()
         );
-
-        return redirect()->to('/tasks');
     }
 
     public function render()
