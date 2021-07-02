@@ -37,27 +37,31 @@ class TaskTest extends TestCase
     public function testCreateTasks()
     {
         $this->actingAs($this->user);
-        Livewire::test(Create::class)
-            ->set('title', 'foo')
-            ->call('create');
+        $testable = Livewire::test(Create::class)
+            ->set('title', null);
+
+        $testable->call('create')
+            ->assertHasErrors(['title']);
+
+        $testable->set('title', 'foo')->call('create');
         $this->assertTrue(Task::whereTitle('foo')->exists());
     }
 
     /**
-     * Tasks can be updated.
+     * Tasks can be created.
      *
      * @return void
      */
-    public function testUpdatedTasks()
+    public function testUpdateTasks()
     {
-        $this->assertTrue(true);
-        // $this->actingAs($this->user);
+        $this->actingAs($this->user);
+        $testable = Livewire::test(Update::class)
+            ->set('title', null);
 
-        // Livewire::test(Update::class)
-        //     ->set('id', 1)
-        //     ->set('title', 'foo')
-        //     ->call('create');
+        $testable->call('create')
+            ->assertHasErrors(['title']);
 
-        // $this->assertTrue(Task::whereTitle('foo')->exists());
+        $testable->set('title', 'foo')->call('create');
+        $this->assertTrue(Task::whereTitle('foo')->exists());
     }
 }

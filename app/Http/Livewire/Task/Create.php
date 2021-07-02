@@ -12,6 +12,8 @@ class Create extends Component
         return Task::rules();
     }
 
+
+
     /**
      * Title property
      *
@@ -24,12 +26,13 @@ class Create extends Component
      *
      * @return void
      */
-    public function create()
+    public function create(): void
     {
         $validated = collect($this->validate());
-        Task::create(
+        $created = Task::create(
             $validated->merge(['user_id' => \auth()->id()])->all()
         );
+        $this->id = $created->id;
     }
 
     public function render()

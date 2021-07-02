@@ -38,10 +38,10 @@ class Update extends Component
      *
      * @return void
      */
-    public function update()
+    public function update(int $id)
     {
         $validated = collect($this->validate());
-        Task::findOrFail()->update(
+        Task::findOrFail($id)->update(
             $validated->merge(['user_id' => \auth()->id()])->all()
         );
     }
