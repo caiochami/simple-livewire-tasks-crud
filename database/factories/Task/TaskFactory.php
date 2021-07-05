@@ -25,7 +25,7 @@ class TaskFactory extends Factory
         return [
             'user_id' => User::factory(),
             'title' => $this->faker->text(255),
-            'status' => $this->faker->boolean
+            'completed' => $this->faker->boolean
         ];
     }
 }

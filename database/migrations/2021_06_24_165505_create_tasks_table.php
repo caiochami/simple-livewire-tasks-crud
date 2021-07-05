@@ -20,6 +20,7 @@ class CreateTasksTable extends Migration
             $table->boolean('completed')->default(false);
             $table->foreignIdFor(User::class)->cascadeOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
