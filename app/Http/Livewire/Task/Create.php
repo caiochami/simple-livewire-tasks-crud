@@ -7,12 +7,12 @@ use Livewire\Component;
 
 class Create extends Component
 {
-    protected function rules()
-    {
-        return Task::rules();
-    }
-
-
+    /**
+     * Modal state
+     *
+     * @var bool
+     */
+    public $isModalActive;
 
     /**
      * Title property
@@ -21,18 +21,35 @@ class Create extends Component
      */
     public $title;
 
+
+    protected function rules()
+    {
+        return Task::rules();
+    }
+
+    public function mount()
+    {
+        $this->isModalActive = false;
+    }
+
+    public function create(): void
+    {
+        $this->isModalActive = true;
+    }
+
     /**
      * Create Task resource.
      *
      * @return void
      */
-    public function create(): void
+    public function save(): void
     {
         $validated = collect($this->validate());
-        $created = Task::create(
+        $task = Task::create(
             $validated->merge(['user_id' => \auth()->id()])->all()
         );
-        $this->id = $created->id;
+        $this->isModalActive = false;
+        $this->emitUp('task-created', $task);
     }
 
     public function render()
