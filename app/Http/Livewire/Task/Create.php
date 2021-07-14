@@ -12,7 +12,7 @@ class Create extends Component
      *
      * @var bool
      */
-    public $isModalActive;
+    public $isModalActive = false;
 
     /**
      * Title property
@@ -27,16 +27,6 @@ class Create extends Component
         return Task::rules();
     }
 
-    public function mount()
-    {
-        $this->isModalActive = false;
-    }
-
-    public function create(): void
-    {
-        $this->isModalActive = true;
-    }
-
     /**
      * Create Task resource.
      *
@@ -48,8 +38,8 @@ class Create extends Component
         $task = Task::create(
             $validated->merge(['user_id' => \auth()->id()])->all()
         );
-        $this->isModalActive = false;
-        $this->emitUp('task-created', $task);
+        $this->reset('isModalActive');
+        $this->emitUp('taskCreated', $task);
     }
 
     public function render()

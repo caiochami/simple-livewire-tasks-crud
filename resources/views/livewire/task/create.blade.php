@@ -15,14 +15,14 @@
         </x-slot>
     
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('isModalActive')" wire:loading.attr="disabled">
-                Cancel
-            </x-jet-secondary-button>
+            {{-- <x-jet-secondary-button wire:click="$reset('isModalActive')" wire:loading.attr="disabled">
+                {{ __('Close') }}
+            </x-jet-secondary-button> --}}
     
             <x-jet-button class="ml-2" wire:click="save" wire:loading.attr="disabled">
-                Save
+                {{ __('Save') }}
             </x-jet-button>
         </x-slot>
     </x-jet-dialog-modal>
-    <x-jet-button wire:click="create">Create Task</x-jet-button>
+    <x-jet-button wire:click="$set('isModalActive', true)">Create Task</x-jet-button>
 </div>

@@ -22,7 +22,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::view('/', 'counter.index')->name('counter');
+    Route::view('/counter', 'counter.index')->name('counter');
     Route::name('tasks.')->prefix('tasks')->group(function () {
         Route::view('/', 'tasks.index')->name('index');
         Route::view('/create', 'tasks.create')->name('create');
