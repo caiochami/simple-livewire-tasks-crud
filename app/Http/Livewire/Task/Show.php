@@ -8,6 +8,13 @@ use Livewire\Component;
 class Show extends Component
 {
     /**
+     * Shows additional information.
+     *
+     * @var boolean
+     */
+    public $contentIsVisible = false;
+
+    /**
      * Task model.
      *
      * @var Task
